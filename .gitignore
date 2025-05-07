@@ -1,3 +1,7 @@
+### Settings ###
+src/main/resources/application.yaml
+
+
 HELP.md
 .gradle
 build/
