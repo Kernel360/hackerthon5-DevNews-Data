@@ -1,11 +1,11 @@
-package lenrek.data_crawling.domain.article;
+package lenrek.data_crawling.domain.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum Category {
+public enum CategoryEnum {
     BACKEND("백엔드"),
     WEB("웹 프론트엔드"),
     CLOUD_INFRA("클라우드 / 인프라"),
