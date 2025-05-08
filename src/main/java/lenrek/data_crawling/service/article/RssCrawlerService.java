@@ -3,9 +3,8 @@ package lenrek.data_crawling.service.article;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.SyndFeedInput;
-import com.rometools.rome.io.XmlReader;
 import lenrek.data_crawling.domain.article.Article;
-import lenrek.data_crawling.domain.article.Category;
+import lenrek.data_crawling.domain.category.CategoryEnum;
 import lenrek.data_crawling.domain.company.Company;
 import lenrek.data_crawling.repository.article.ArticleRepository;
 import lenrek.data_crawling.repository.company.CompanyRepository;
@@ -59,7 +58,7 @@ public class RssCrawlerService {
                     if (!articleRepository.existsByCompanyAndUrl(company, link)) {
 
                         // AI 요약 및 category 로직
-                        Category cat = Category.BACKEND;
+                        CategoryEnum cat = CategoryEnum.BACKEND;
                         String summary = "";
 
                         Article article = new Article(title, link, pubDate, company, cat, summary);
