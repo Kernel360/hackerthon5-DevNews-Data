@@ -1,14 +1,11 @@
 package lenrek.data_crawling.domain.company;
 import jakarta.persistence.*;
-import lenrek.data_crawling.domain.Timestamped;
+import lenrek.data_crawling.domain.support.BaseEntity;
 import lombok.Getter;
 
 @Entity
 @Getter
-public class Company extends Timestamped {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Company extends BaseEntity {
 
     @Column(nullable = false)
     private String name;
