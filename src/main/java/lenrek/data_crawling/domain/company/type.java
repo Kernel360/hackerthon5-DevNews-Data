@@ -1,4 +1,4 @@
-package lenrek.data_crawling.domain.article;
+package lenrek.data_crawling.domain.company;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,7 +6,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum type {
-    CULTURE("개발 문화 / 커리어");
+    BLOG("테크 블로그"),
+    NEWS("테크 뉴스");
 
-    private String value;
+    private final String value;
 }

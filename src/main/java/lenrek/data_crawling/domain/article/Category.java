@@ -22,5 +22,5 @@ public enum Category {
     SECURITY("보안"),
     CULTURE("개발 문화 / 커리어");
 
-    private String value;
+    private final String value;
 }
