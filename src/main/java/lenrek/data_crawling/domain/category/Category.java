@@ -21,12 +21,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Category extends BaseEntity {
 
-    @Column(name = "category_name", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private CategoryEnum name;
+    private String name;
 
     @Builder
-    public Category(CategoryEnum name) {
+    public Category(String name) {
         this.name = name;
     }
 }
