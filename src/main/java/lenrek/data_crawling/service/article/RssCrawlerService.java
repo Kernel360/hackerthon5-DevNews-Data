@@ -30,7 +30,7 @@ public class RssCrawlerService {
     private CompanyRepository companyRepository;
     private final PipelineService pipelineService;
 
-    @Scheduled(cron = "0 18 11 * * *")
+    @Scheduled(cron = "0 0 1 * * *")
     public void crawlAllFeeds(){
         List<Company> rssFeeds = companyRepository.findAll();
 
