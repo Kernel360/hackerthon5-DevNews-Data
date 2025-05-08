@@ -37,6 +37,7 @@ dependencies {
 
     implementation 'com.rometools:rome:2.1.0'
 
+    implementation 'org.jsoup:jsoup:1.20.1'
 }
 
 tasks.named('test') {
