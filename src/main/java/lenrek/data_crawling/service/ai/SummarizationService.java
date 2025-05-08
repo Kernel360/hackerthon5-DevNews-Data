@@ -1,4 +1,4 @@
-package lenrek.data_crawling.service.summary;
+package lenrek.data_crawling.service.ai;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
