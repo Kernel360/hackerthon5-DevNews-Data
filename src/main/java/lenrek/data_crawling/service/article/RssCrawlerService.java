@@ -4,8 +4,9 @@ import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.SyndFeedInput;
 import lenrek.data_crawling.domain.article.Article;
-import lenrek.data_crawling.domain.category.CategoryEnum;
+import lenrek.data_crawling.domain.category.Category;
 import lenrek.data_crawling.domain.company.Company;
+import lenrek.data_crawling.repository.Category.CategoryRepository;
 import lenrek.data_crawling.repository.article.ArticleRepository;
 import lenrek.data_crawling.repository.company.CompanyRepository;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ import java.util.List;
 @AllArgsConstructor
 @Slf4j
 public class RssCrawlerService {
+    private final CategoryRepository categoryRepository;
     private ArticleRepository articleRepository;
     private CompanyRepository companyRepository;
 
@@ -58,10 +60,11 @@ public class RssCrawlerService {
                     if (!articleRepository.existsByCompanyAndUrl(company, link)) {
 
                         // AI 요약 및 category 로직
-                        CategoryEnum cat = CategoryEnum.BACKEND;
+                        // Category값 임시 null 지정
+                        Category category = null;
                         String summary = "";
 
-                        Article article = new Article(title, link, pubDate, company, cat, summary);
+                        Article article = new Article(title, link, pubDate, company, category, summary);
                         articleRepository.save(article);
                         savedCount++;
                     } else break;

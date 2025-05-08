@@ -1,7 +1,7 @@
 package lenrek.data_crawling.domain.article;
 
 import jakarta.persistence.*;
-import lenrek.data_crawling.domain.category.CategoryEnum;
+import lenrek.data_crawling.domain.category.Category;
 import lenrek.data_crawling.domain.company.Company;
 import lenrek.data_crawling.domain.support.BaseEntity;
 import lombok.Builder;
@@ -26,19 +26,19 @@ public class Article extends BaseEntity {
     @JoinColumn(name = "company_id")
     private Company company;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private CategoryEnum categoryEnum;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @Column(nullable = false)
     private String summary;
 
     @Builder
-    public Article(String title, String url, LocalDateTime publishedDate, Company company, CategoryEnum categoryEnum, String summary) {
+    public Article(String title, String url, LocalDateTime publishedDate, Company company, Category category, String summary) {
         this.title = title;
         this.url = url;
         this.publishedDate = publishedDate;
-        this.categoryEnum = categoryEnum;
+        this.category = category;
         this.company = company;
         this.summary = summary;
     }
