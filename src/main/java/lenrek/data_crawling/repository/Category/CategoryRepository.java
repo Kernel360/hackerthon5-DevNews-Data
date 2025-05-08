@@ -1,5 +1,6 @@
 package lenrek.data_crawling.repository.Category;
 
+import java.util.Optional;
 import lenrek.data_crawling.domain.category.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
