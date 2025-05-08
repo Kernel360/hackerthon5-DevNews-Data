@@ -15,13 +15,22 @@ public class SummarizationService {
     @Value("${upstage.api-url}")
     private String apiUrl;
 
-    public String summarize(String plainText) {
+    public String summarize(String title, String plainText) {
         Map<String, Object> systemMsg = Map.of(
                 "role", "system",
                 "content", """
-        다음 블로그 글을 한국어로 **3문장 이내**로, **원본의 20% 분량 이하**가 되도록 과감히 압축하여 요약해 주세요.
-        핵심 키워드만 포함하고, 상세 설명은 생략하십시오.
-        """
+                You are an expert summarizer for Korean-language technical blog posts.  
+        Use the **title** below to focus your summary, then read the full article and generate a concise summary in Korean that meets all of the following:
+        
+        📌 **Title**: %s
+        
+        - No more than **3 sentences**.  
+        - Do **not** add any new information; include only facts explicitly stated in the source.  
+        - Each sentence must convey a **distinct** key point (no repetition).  
+        - Omit any unnecessary introductions or conclusions.  
+        - Include **only** core keywords; skip detailed explanations.  
+        - **Respond with the summary only**—no extra commentary or labels.
+        """.formatted(title)
         );
         Map<String, Object> userMsg = Map.of(
             "role", "user",
@@ -31,8 +40,8 @@ public class SummarizationService {
         Map<String, Object> payload = Map.of(
             "model", "solar-pro",
             "messages", List.of(systemMsg, userMsg),
-            "max_tokens", 500,
-            "temperature", 0.3
+            "max_tokens", 200,
+            "temperature", 0.0
         );
 
         HttpEntity<Map<String,Object>> request = new HttpEntity<>(payload);

@@ -4,11 +4,11 @@ import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.SyndFeedInput;
 import lenrek.data_crawling.domain.article.Article;
-import lenrek.data_crawling.domain.category.Category;
 import lenrek.data_crawling.domain.company.Company;
 import lenrek.data_crawling.repository.Category.CategoryRepository;
 import lenrek.data_crawling.repository.article.ArticleRepository;
 import lenrek.data_crawling.repository.company.CompanyRepository;
+import lenrek.data_crawling.service.ai.PipelineService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -28,8 +28,9 @@ public class RssCrawlerService {
     private final CategoryRepository categoryRepository;
     private ArticleRepository articleRepository;
     private CompanyRepository companyRepository;
+    private final PipelineService pipelineService;
 
-    @Scheduled(cron = "0 18 11 * * *")
+    @Scheduled(cron = "0 0 1 * * *")
     public void crawlAllFeeds(){
         List<Company> rssFeeds = companyRepository.findAll();
 
@@ -59,12 +60,16 @@ public class RssCrawlerService {
 
                     if (!articleRepository.existsByCompanyAndUrl(company, link)) {
 
-                        // AI 요약 및 category 로직
-                        // Category값 임시 null 지정
-                        Category category = null;
-                        String summary = "";
+                        var result = pipelineService.summarizeAndClassify(title, link);
 
-                        Article article = new Article(title, link, pubDate, company, category, summary);
+                        Article article = new Article(
+                            title,
+                            link,
+                            pubDate,
+                            company,
+                            result.category(),
+                            result.summary()
+                        );
                         articleRepository.save(article);
                         savedCount++;
                     } else break;
@@ -81,6 +86,4 @@ public class RssCrawlerService {
     public static String sanitizeXml(String xml) {
         return xml.replaceAll("[\\x00-\\x1F&&[^\\x09\\x0A\\x0D]]", "");
     }
-
-
 }
