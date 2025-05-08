@@ -1,10 +1,5 @@
 package lenrek.data_crawling.domain.article;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lenrek.data_crawling.domain.Timestamped;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

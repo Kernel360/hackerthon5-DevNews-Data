@@ -1,8 +1,8 @@
 package lenrek.data_crawling.domain.article;
 
 import jakarta.persistence.*;
-import lenrek.data_crawling.domain.Timestamped;
 import lenrek.data_crawling.domain.company.Company;
+import lenrek.data_crawling.domain.support.BaseEntity;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
@@ -10,10 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
-public class Article extends Timestamped {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Article extends BaseEntity {
 
     @Column(nullable = false)
     private String title;
